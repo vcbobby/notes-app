@@ -1,0 +1,30 @@
+{
+    "name": "notes-app",
+    "version": "1.0.0",
+    "main": "index.js",
+    "workspaces": [
+        "api",
+        "app"
+    ],
+    "scripts": {
+        "build": "npm run build --workspaces=app",
+        "start": "npm run start --workspaces=api",
+        "dev:api": "npm run build && npm run dev --workspaces=api"
+    },
+    "keywords": [],
+    "author": "Victor Castillo <Castillovictor2461@gmail.com>",
+    "license": "MIT",
+    "description": "",
+    "devDependencies": {
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "^3.3.3",
+        "standard": "^17.1.0"
+    },
+    "eslintConfig": {
+        "extends": [
+            "./node_modules/standard/eslintrc.json",
+            "react-app",
+            "react-app/jest"
+        ]
+    }
+}
