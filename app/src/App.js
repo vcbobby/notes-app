@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect } from 'react'
 import './App.css'
 import Note from './components/Note'
@@ -10,7 +9,7 @@ import LoginForm from './components/LoginForm'
 import CreateNote from './components/CreateNote'
 
 function App() {
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes] = useState([]) // Inicializa con un array vacío
     const [loading, setLoading] = useState(false)
     const [user, setUser] = useState(null)
     const [errorMessage, setErrorMessage] = useState('')
@@ -26,6 +25,7 @@ function App() {
             setUser(user)
         }
     }, [])
+
     // Manejo de Login
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -49,8 +49,8 @@ function App() {
             }, 5000)
         }
     }
-    // Manejo de logout
 
+    // Manejo de logout
     const handleLogout = () => {
         setUser(null)
         window.localStorage.removeItem('loggedNoteAppUser')
@@ -77,12 +77,25 @@ function App() {
         }
     }
 
+    // Cargar las notas al cargar el componente
     useEffect(() => {
         setLoading(true)
-        getAllNotes().then((notes) => {
-            setNotes(notes)
-            setLoading(false)
-        })
+        getAllNotes()
+            .then((notes) => {
+                // Validar que la respuesta sea un array
+                if (Array.isArray(notes)) {
+                    setNotes(notes)
+                } else {
+                    setErrorMessage(
+                        'Error: Las notas no están en el formato esperado'
+                    )
+                }
+                setLoading(false)
+            })
+            .catch((error) => {
+                setErrorMessage('Error al cargar las notas')
+                setLoading(false)
+            })
     }, [])
 
     return (
