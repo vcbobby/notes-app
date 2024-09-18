@@ -11,7 +11,7 @@ const loginRouter = require('../controllers/login')
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static('../app/build'))
+app.use(express.static('/app/build'))
 
 app.use('/api/notes', notesRouter)
 app.use('/api/users', usersRouter)
