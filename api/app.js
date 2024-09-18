@@ -9,15 +9,9 @@ const notesRouter = require('./controllers/notes')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 
-const corsOptions = {
-    origin: '*', // Permite solicitudes desde cualquier origen
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}
-
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
-app.use(express.static('/app/build'))
+app.use(express.static('../app/build'))
 
 app.use('/api/notes', notesRouter)
 app.use('/api/users', usersRouter)
